@@ -1,1 +1,15 @@
-
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namePrefix: dev-
+commonLabels:
+ env: dev
+namespace: development
+resources:
+- ../../base
+patches:
+- path: ./replicas.yaml
+- path: ./nodeport.yaml
+images:
+ - name: quay.io/redhattraining/hello-world-nginx 
+   newName: quay.io/redhattraining/php-ssl
+   newTag: v1.0
