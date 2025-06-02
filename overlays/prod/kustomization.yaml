@@ -1,14 +1,16 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namePrefix: prod-
-commonLabels:
- variant: products
+labels:
+  - pairs:
+      env: prod
+    includeSelectors: true    
+namespace: production
 resources:
-#bases:
 - ../../base
 patches:
 - path: ./replicas.yaml
 - path: ./nodeport.yaml
 images:
- - name: quay.io/redhattraining/hello-world-nginx
-   newTag: 1.9.0
+ - newTag: v1.0
+   name: quay.io/redhattraining/hello-world-nginx
