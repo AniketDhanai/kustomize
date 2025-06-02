@@ -3,7 +3,7 @@ kind: Service
 metadata:
  name: nginx-k-service
 spec:
- type: NodePort
+ type: ClusterIP
  ports:
   - port: 80
  selector:
